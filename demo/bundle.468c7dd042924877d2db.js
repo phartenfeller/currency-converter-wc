@@ -1,3 +1,8 @@
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!***********************************!*\
+  !*** ./src/currency-converter.js ***!
+  \***********************************/
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
@@ -83,3 +88,7 @@ class CurrencyConverter extends HTMLElement {
 }
 
 window.customElements.define('currency-converter', CurrencyConverter);
+
+/******/ })()
+;
+//# sourceMappingURL=bundle.468c7dd042924877d2db.js.map
