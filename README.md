@@ -4,6 +4,8 @@ A simple Web Component that converts a given currency to another.
 
 This component uses the [free and open source API from the European Central Bank](https://exchangeratesapi.io/).
 
+Demo: https://phartenfeller.github.io/currency-converter-wc/demo/
+
 ![demo](./assets/demo-screenshot.png)
 
 ## Uasge
