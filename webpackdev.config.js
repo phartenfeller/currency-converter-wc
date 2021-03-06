@@ -6,7 +6,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'demo/index.html',
+      template: 'index.html',
     }),
   ],
   optimization: {
@@ -14,12 +14,12 @@ module.exports = {
   },
   devtool: 'source-map',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'demo'),
     filename: 'bundle.[contenthash].js',
   },
   devServer: {
     watchContentBase: true,
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, 'demo'),
     open: true,
   },
 };
