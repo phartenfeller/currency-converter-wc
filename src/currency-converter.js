@@ -2,7 +2,12 @@ const template = document.createElement('template');
 template.innerHTML = `
   <style>
     .curr-shell {
-      background: #E2E8F0;
+      color: #262626;
+      background: #F1F5F9;
+      border-radius: 16px;
+      padding: 4px 8px;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     }
   </style>
   <span class="curr-shell"></span>`;
@@ -24,14 +29,28 @@ class CurrencyConverter extends HTMLElement {
     });
   }
 
-  fillData() {
+  renderData() {
+    const browserLocale = navigator.language;
+    const originFormat = new Intl.NumberFormat(browserLocale, {
+      style: 'currency',
+      currency: this.baseCurrency,
+    });
+    const conversionFormat = new Intl.NumberFormat(browserLocale, {
+      style: 'currency',
+      currency: this.conversionCurrency,
+    });
+
+    const originAmount = originFormat.format(this.value);
+
     this.convertedAmount =
       this.value *
       window.rates[this.baseCurrency].data.rates[this.conversionCurrency];
 
+    const conversionAmount = conversionFormat.format(this.convertedAmount);
+
     this.shadowRoot.querySelector(
       '.curr-shell'
-    ).innerText = `${this.baseCurrency} - ${this.value} - ${this.conversionCurrency} - ${this.convertedAmount}`;
+    ).innerText = `${originAmount} | ${conversionAmount}`;
   }
 
   async connectedCallback() {
@@ -51,13 +70,13 @@ class CurrencyConverter extends HTMLElement {
       console.log('fetching data');
       window.rates[this.baseCurrency].data = await this.fetchApi();
       window.rates[this.baseCurrency].status = 'loaded';
-      this.fillData();
+      this.renderData();
       // resolve all callbacks from the waiting ones
       window.rates[this.baseCurrency].callbacks.forEach((cb) => cb());
     } else if (window.rates[this.baseCurrency].status === 'fetching') {
       // currently some else is fetching -> add callback to be called when done
       console.log('status loading');
-      window.rates[this.baseCurrency].callbacks.push(() => this.fillData());
+      window.rates[this.baseCurrency].callbacks.push(() => this.renderData());
     } else {
       // all data loaded
       console.log('loaded');

@@ -4,12 +4,20 @@
   <title>Demo Currency Converter</title>
 </head>
 
+<style>
+  currency-converter {
+    margin: 8px;
+  }
+</style>
+
 <body>
   <h1>Currency Converter</h1>
-  <currency-converter base-currency="USD" value="1.32" conversion-currency="EUR"></currency-converter>
-  <currency-converter base-currency="USD" value="2.33" conversion-currency="CHF"></currency-converter>
-  <currency-converter base-currency="USD" value="3.33" conversion-currency="CHF"></currency-converter>
-  <currency-converter base-currency="USD" value="9.33" conversion-currency="CHF"></currency-converter>
-  <currency-converter base-currency="USD" value="2.00" conversion-currency="CHF"></currency-converter>
-  <currency-converter base-currency="USD" value="0.32" conversion-currency="CHF"></currency-converter>
+  <div style="display: grid; grid-template-columns: repeat(2,minmax(0,1fr));">
+    <currency-converter base-currency="USD" value="1.32" conversion-currency="EUR"></currency-converter>
+    <currency-converter base-currency="USD" value="2.33" conversion-currency="CHF"></currency-converter>
+    <currency-converter base-currency="EUR" value="3.33" conversion-currency="CHF"></currency-converter>
+    <currency-converter base-currency="USD" value="9.33" conversion-currency="CHF"></currency-converter>
+    <currency-converter base-currency="USD" value="2.00" conversion-currency="CHF"></currency-converter>
+    <currency-converter base-currency="AUD" value="0.32" conversion-currency="GBP"></currency-converter>
+  </div>
 </body>
