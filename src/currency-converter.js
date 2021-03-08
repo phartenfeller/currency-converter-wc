@@ -77,7 +77,7 @@ class CurrencyConverter extends HTMLElement {
       window.rates[this.baseCurrency].callbacks.push(() => this.renderData());
     } else {
       // all data loaded
-      this.fillData();
+      this.renderData();
     }
   }
 }
