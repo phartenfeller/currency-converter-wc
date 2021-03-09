@@ -28,8 +28,8 @@ class CurrencyConverter extends HTMLElement {
     return new Promise((resolve, reject) => {
       fetch(`https://api.exchangeratesapi.io/latest?base=${this.baseCurrency}`)
         .then((response) => response.json())
-        .then((data) => resolve(data))
-        .catch((err) => reject(err));
+        .then(resolve)
+        .catch(reject);
     });
   }
 
@@ -46,9 +46,23 @@ class CurrencyConverter extends HTMLElement {
 
     const originAmount = originFormat.format(this.value);
 
-    this.convertedAmount =
-      this.value *
-      window.rates[this.baseCurrency].data.rates[this.conversionCurrency];
+    if (!window.hartenfellerdev.CurrencyConverter[this.baseCurrency]) {
+      throw new Error(
+        `Could not load rates for base currency ${this.baseCurrency}`
+      );
+    }
+
+    const conversionRate =
+      window.hartenfellerdev.CurrencyConverter[this.baseCurrency]?.data
+        ?.rates?.[this.conversionCurrency];
+
+    if (!conversionRate) {
+      throw new Error(
+        `Could not find conversion rate for ${this.conversionCurrency}`
+      );
+    }
+
+    this.convertedAmount = this.value * conversionRate;
 
     const conversionAmount = conversionFormat.format(this.convertedAmount);
 
@@ -62,27 +76,43 @@ class CurrencyConverter extends HTMLElement {
     this.value = parseFloat(this.getAttribute('value'));
     this.conversionCurrency = this.getAttribute('conversion-currency');
 
-    if (!window.rates) window.rates = {};
+    if (!window.hartenfellerdev) {
+      window.hartenfellerdev = {};
+    }
 
-    if (!window.rates[this.baseCurrency]) {
+    if (!window.hartenfellerdev.CurrencyConverter) {
+      window.hartenfellerdev.CurrencyConverter = {};
+    }
+
+    if (!window.hartenfellerdev.CurrencyConverter[this.baseCurrency]) {
       // first one -> fetch api
-      window.rates[this.baseCurrency] = {
+      window.hartenfellerdev.CurrencyConverter[this.baseCurrency] = {
         status: 'fetching',
         data: null,
         callbacks: [],
       };
 
-      window.rates[this.baseCurrency].data = await this.fetchApi();
-      window.rates[this.baseCurrency].status = 'loaded';
+      window.hartenfellerdev.CurrencyConverter[
+        this.baseCurrency
+      ].data = await this.fetchApi();
+      window.hartenfellerdev.CurrencyConverter[this.baseCurrency].status =
+        'loaded';
       this.renderData();
       // resolve all callbacks from the waiting ones
-      window.rates[this.baseCurrency].callbacks.forEach((cb) => cb());
-    } else if (window.rates[this.baseCurrency].status === 'fetching') {
+      window.hartenfellerdev.CurrencyConverter[
+        this.baseCurrency
+      ].callbacks.forEach((cb) => cb());
+    } else if (
+      window.hartenfellerdev.CurrencyConverter[this.baseCurrency].status ===
+      'fetching'
+    ) {
       // currently some else is fetching -> add callback to be called when done
-      window.rates[this.baseCurrency].callbacks.push(() => this.renderData());
+      window.hartenfellerdev.CurrencyConverter[
+        this.baseCurrency
+      ].callbacks.push(() => this.renderData());
     } else {
       // all data loaded
-      this.fillData();
+      this.renderData();
     }
   }
 }
@@ -91,4 +121,4 @@ window.customElements.define('currency-converter', CurrencyConverter);
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.468c7dd042924877d2db.js.map
+//# sourceMappingURL=bundle.js.map

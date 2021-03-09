@@ -8,7 +8,18 @@ Demo: https://phartenfeller.github.io/currency-converter-wc/demo/
 
 ![demo](./assets/demo-screenshot.png)
 
-## Uasge
+## Usage
+
+<!--
+```
+<custom-element-demo>
+  <template>
+    <script src="demo/index.js"></script>
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
 
 ```html
 <currency-converter
