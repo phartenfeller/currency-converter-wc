@@ -10,6 +10,9 @@
   "author": "phartenfeller",
   "license": "MIT",
   "homepage": "https://github.com/phartenfeller/currency-converter-wc",
+  "keywords": [
+    "webcomponent"
+  ],
   "devDependencies": {
     "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.1",
