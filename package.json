@@ -1,4 +1,15 @@
 {
+  "name": "currency-converter-wc",
+  "version": "1.0.0",
+  "description": "A Web Component that converts currencies",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/phartenfeller/currency-converter-wc.git",
+  "author": "phartenfeller",
+  "license": "MIT",
+  "homepage": "https://github.com/phartenfeller/currency-converter-wc",
   "devDependencies": {
     "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.1",
@@ -14,9 +25,9 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "start": "npx webpack-cli serve --open --mode=development --config webpackdev.config.js",
+    "start": "npx webpack-cli serve --open --mode=development --config webpack.dev.js",
     "build": "npm-run-all build-demo build-prod",
-    "build-demo": "npx webpack-cli --mode=development --config webpackdev.config.js",
-    "build-prod": "npx webpack-cli --mode=production --config webpackprod.config.js"
+    "build-demo": "npx webpack-cli --mode=development --config webpack.dev.js",
+    "build-prod": "npx webpack-cli --mode=production --config webpack.prod.js"
   }
 }
