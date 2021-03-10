@@ -1,3 +1,5 @@
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/currency-converter-wc)
+
 # Currency Converter Web Component
 
 A simple Web Component that converts a given currency to another.
@@ -27,6 +29,14 @@ Demo: https://phartenfeller.github.io/currency-converter-wc/demo/
   value="1.32"
   conversion-currency="EUR"
 ></currency-converter>
+```
+
+## Install
+
+[![NPM](https://nodei.co/npm/currency-converter-wc.png)](https://nodei.co/npm/currency-converter-wc/)
+
+```sh
+npm install currency-converter-wc
 ```
 
 ## Development
