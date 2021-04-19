@@ -26,7 +26,7 @@ class CurrencyConverter extends HTMLElement {
 
   async fetchApi() {
     return new Promise((resolve, reject) => {
-      fetch(`https://api.exchangeratesapi.io/latest?base=${this.baseCurrency}`)
+      fetch(`https://api.ratesapi.io/latest?base=${this.baseCurrency}`)
         .then((response) => response.json())
         .then(resolve)
         .catch(reject);
