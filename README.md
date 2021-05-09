@@ -33,10 +33,10 @@ Demo: https://phartenfeller.github.io/currency-converter-wc/demo/
 
 ## Install
 
-[![NPM](https://nodei.co/npm/currency-converter-wc.png)](https://nodei.co/npm/currency-converter-wc/)
+[![NPM](https://nodei.co/npm/gatsby-philipps-foam-theme.png)](https://nodei.co/npm/gatsby-philipps-foam-theme/)
 
 ```sh
-npm install currency-converter-wc
+npm install gatsby-philipps-foam-theme
 ```
 
 ## Development
